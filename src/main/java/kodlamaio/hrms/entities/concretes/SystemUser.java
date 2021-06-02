@@ -23,10 +23,5 @@ public class SystemUser extends User {
     @Column(name = "last_name")
     private String lastName;
 
-//    @OneToOne()
-//    @MapsId
-//    @JoinColumn(name = "user_id", referencedColumnName = "id")
-//    private User user;
-
 
 }

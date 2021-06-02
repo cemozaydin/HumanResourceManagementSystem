@@ -25,6 +25,26 @@ public class JobTitlesController {
         return this.jobTitleService.getAll();
     }
 
+    @GetMapping("/getAllSortedAsc")
+    public DataResult<List<JobTitle>> getAllSortedAsc(){
+        return this.jobTitleService.getAllSortedAsc();
+    }
+
+    @GetMapping("/getAllSortedDesc")
+    public DataResult<List<JobTitle>> getAllSortedDesc(){
+        return this.jobTitleService.getAllSortedDesc();
+    }
+
+    @GetMapping("/getByTitle")
+    public DataResult<JobTitle> getByTitle(@RequestParam String title){
+        return this.jobTitleService.getByTitle(title);
+    }
+
+    @GetMapping("/getByTitleStartsWith")
+    public DataResult<List<JobTitle>> getByTitleStartsWith(@RequestParam String title){
+        return this.jobTitleService.getByTitleStartsWith(title);
+    }
+
     @PostMapping("/add")
     public Result add(@RequestBody JobTitle jobTitle){
         return this.jobTitleService.add(jobTitle);

@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class User {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -27,13 +27,17 @@ public abstract class User {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "isActive")
-    private boolean isActive;
+    @Column(name = "is_active")
+    private boolean isActive = false;
 
-//    @OneToOne(mappedBy = "user")
-//    private SystemUser systemUser;
-//
-//    @OneToOne(mappedBy = "user")
-//    private Candidate candidate;
+    public User(String email, String password, boolean isActive) {
+        this.email = email;
+        this.password = password;
+        this.isActive = isActive;
+    }
 
+    public User(String email, String password){
+        this.email=email;
+        this.password=password;
+    }
 }

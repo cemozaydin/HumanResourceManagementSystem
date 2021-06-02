@@ -11,12 +11,13 @@ import java.time.LocalDate;
 
 @Entity
 @Data
-@AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Table(name = "candidates")
 @PrimaryKeyJoinColumn(name = "user_id", referencedColumnName = "id")
 public class Candidate extends User {
+
 
     @Column(name = "first_name")
     private String firstName;
@@ -30,7 +31,12 @@ public class Candidate extends User {
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
-//    @OneToOne()
-//    @JoinColumn(name = "user_id",referencedColumnName = "id")
-//    private User user;
+
+    public Candidate(String email, String password, String firstName, String lastName, String identityNumber, LocalDate birthDate) {
+        super(email,password);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.identityNumber = identityNumber;
+        this.birthDate = birthDate;
+    }
 }

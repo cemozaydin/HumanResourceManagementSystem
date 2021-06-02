@@ -8,6 +8,7 @@ import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobTitleDao;
 import kodlamaio.hrms.entities.concretes.JobTitle;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,8 +28,31 @@ public class JobTitleManager implements JobTitleService {
     }
 
     @Override
+    public DataResult<List<JobTitle>> getAllSortedAsc() {
+        Sort sort = Sort.by(Sort.Direction.ASC,"title");
+        return new SuccessDataResult<List<JobTitle>>(this.jobTitleDao.findAll(sort),"A-Z'ye göre Listendi.");
+    }
+
+    @Override
+    public DataResult<List<JobTitle>> getAllSortedDesc() {
+        Sort sort = Sort.by(Sort.Direction.DESC,"title");
+        return new SuccessDataResult<List<JobTitle>>(this.jobTitleDao.findAll(sort),"Z-A'ya göre Listendi.");
+    }
+
+    @Override
     public Result add(JobTitle jobTitle) {
         this.jobTitleDao.save(jobTitle);
         return new SuccessResult("Ünvan eklendi");
     }
+
+    @Override
+    public DataResult<JobTitle> getByTitle(String title) {
+        return new SuccessDataResult<JobTitle>(this.jobTitleDao.getByTitle(title),"Ünvan Listelendi");
+    }
+
+    @Override
+    public DataResult<List<JobTitle>> getByTitleStartsWith(String title) {
+        return new SuccessDataResult<List<JobTitle>>(this.jobTitleDao.getByTitleStartsWith(title));
+    }
+
 }
