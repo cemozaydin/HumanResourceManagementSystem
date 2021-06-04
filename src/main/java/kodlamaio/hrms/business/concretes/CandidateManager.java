@@ -1,8 +1,11 @@
 package kodlamaio.hrms.business.concretes;
 
 import kodlamaio.hrms.business.abstracts.CandidateService;
+import kodlamaio.hrms.business.validationRules.CandidateValidator;
 import kodlamaio.hrms.core.abstracts.EmailCheckService;
 import kodlamaio.hrms.core.abstracts.CheckMernisService;
+import kodlamaio.hrms.core.abstracts.SendEmailService;
+import kodlamaio.hrms.core.utilities.generator.Genarator;
 import kodlamaio.hrms.core.utilities.results.*;
 import kodlamaio.hrms.dataAccess.abstracts.CandidateDao;
 import kodlamaio.hrms.entities.concretes.Candidate;
@@ -18,28 +21,35 @@ public class CandidateManager implements CandidateService {
     private CandidateDao candidateDao;
     private CheckMernisService checkMernisService;
     private EmailCheckService emailCheckService;
+    private SendEmailService sendEmailService;
 
     @Autowired
-    public CandidateManager(CandidateDao candidateDao, @Qualifier("checkMernisAdapter") CheckMernisService checkMernisService, EmailCheckService emailCheckService) {
+    public CandidateManager(
+            CandidateDao candidateDao,
+            @Qualifier("checkFakeMernisAdapter") CheckMernisService checkMernisService,
+            EmailCheckService emailCheckService,
+            @Qualifier("sendEmailManager") SendEmailService sendEmailService
+    ) {
         super();
         this.candidateDao = candidateDao;
         this.checkMernisService = checkMernisService;
         this.emailCheckService = emailCheckService;
+        this.sendEmailService = sendEmailService;
+    }
+
+    @Override
+    public DataResult<List<Candidate>> getAll() {
+        return new SuccessDataResult<List<Candidate>>(this.candidateDao.findAll());
     }
 
     @Override
     public Result register(Candidate candidate, String passwordConfirm) {
 
-        if(Objects.isNull(candidate.getFirstName())){
-            return new ErrorResult("İsim alanı boş bırakılamaz.");
-        }else if(Objects.isNull(candidate.getLastName())){
-            return new ErrorResult("Soyisim alanı boş bırakılamaz.");
-        }else if(Objects.isNull(candidate.getEmail())) {
-            return new ErrorResult("E-mail alanı boş bırakılamaz.");
-        }else if(Objects.isNull(candidate.getIdentityNumber())) {
-            return new ErrorResult("Kimlik Numarası alanı boş bırakılamaz.");
-        }else if(Objects.isNull(candidate.getBirthDate())) {
-            return new ErrorResult("Doğum Tarihi alanı boş bırakılamaz.");
+        var result = CandidateValidator.validatorForCandidate(candidate);
+
+        if(!result.isSuccess())
+        {
+            return result;
         }
 
         if(!this.emailCheckService.emailCheck(candidate.getEmail()))
@@ -60,17 +70,16 @@ public class CandidateManager implements CandidateService {
         }
 
         if(!Objects.equals(candidate.getPassword(),passwordConfirm)){
-            return new ErrorResult("Şİfre eşleşmedi. Kayıt Başarısız...");
+        return new ErrorResult("Şİfre eşleşmedi. Kayıt Başarısız...");
         }
 
-        this.candidateDao.save(candidate);
-        return new SuccessResult("<<< Kayıt Başarılı >>>");
-    }
+    String genarator = Genarator.generateString();
+    String mailBodyMessage = String.format("Kayıt işleminin tamamlanabilmesi için gerekli kod : %s " ,genarator);
 
-    @Override
-    public DataResult<List<Candidate>> getAll() {
-        return new SuccessDataResult<List<Candidate>>(this.candidateDao.findAll());
-    }
+    this.candidateDao.save(candidate);
+    this.sendEmailService.sendSimpleMessage(candidate.getEmail(),"Kayıt Onaylama Hk.", mailBodyMessage);
+        return new SuccessResult("<<< Kayıt Başarılı. Kullanıcıya mail gönderildi. >>>");
+}
 
     public boolean isEmailUsed(String email){
         List<Candidate> emailList = this.candidateDao.findAllByEmail(email);
@@ -81,8 +90,8 @@ public class CandidateManager implements CandidateService {
     }
 
     public boolean isIdentityNumberUsed(String identityNumber){
-        List<Candidate> identityList = this.candidateDao.findAllByEmailOrIdentityNumber(null,identityNumber);
-        if(identityList.size()>0){
+        Candidate result = this.candidateDao.findByIdentityNumber(identityNumber);
+        if(result!=null){
             return  false;
         }
         return true;

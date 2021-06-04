@@ -1,5 +1,8 @@
 package kodlamaio.hrms;
 
+import kodlamaio.hrms.business.validationRules.EmployerValidator;
+import kodlamaio.hrms.core.utilities.generator.Genarator;
+import kodlamaio.hrms.entities.concretes.Employer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +17,7 @@ public class HrmsApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(HrmsApplication.class, args);
+
     }
 
     @Bean
