@@ -1,30 +1,32 @@
 package kodlamaio.hrms.entities.concretes;
 
-import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.List;
 
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "currencies")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "jobPostings"})
-@Table(name = "job_titles")
-public class JobTitle {
-
+public class Currency {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "title")
-    private String title;
+    @Column(name = "currency_code")
+    private String currencyCode;
 
-    @OneToMany(mappedBy = "jobTitle")
+    @Column(name = "currency_name")
+    private String currencyName;
+
+    @OneToMany(mappedBy = "currency")
     private List<JobPosting> jobPostings;
 }
