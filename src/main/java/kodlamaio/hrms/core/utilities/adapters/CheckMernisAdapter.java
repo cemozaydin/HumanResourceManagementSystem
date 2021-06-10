@@ -2,7 +2,7 @@ package kodlamaio.hrms.core.utilities.adapters;
 
 import kodlamaio.hrms.core.abstracts.CheckMernisService;
 import kodlamaio.hrms.entities.concretes.Candidate;
-import kodlamaio.hrms.mernisService.AOBKPSPublicSoap;
+import kodlamaio.hrms.externalService.mernisService.AOBKPSPublicSoap;
 import org.springframework.stereotype.Service;
 
 @Service

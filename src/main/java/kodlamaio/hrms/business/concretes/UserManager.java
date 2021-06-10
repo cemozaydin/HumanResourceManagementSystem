@@ -1,7 +1,9 @@
 package kodlamaio.hrms.business.concretes;
 
 import kodlamaio.hrms.business.abstracts.UserService;
+import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
+import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.UserDao;
 import kodlamaio.hrms.entities.abstracts.User;
@@ -20,4 +22,10 @@ public class UserManager implements UserService {
         this.userDao.save(user);
         return new SuccessResult();
     }
+
+    @Override
+    public DataResult<User> getUserById(int id) {
+        return new SuccessDataResult<User>(this.userDao.getUserById(id));
+    }
+
 }

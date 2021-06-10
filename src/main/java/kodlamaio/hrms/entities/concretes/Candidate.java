@@ -19,7 +19,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = false)
 @Table(name = "candidates")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "candidateSchools","candidateExperiences",
-        "candidateLanguages","socialMediaAccounts","computerAndTechnologySkills","coverLetters"})
+        "candidateLanguages","socialMediaAccounts","computerAndTechnologySkills","coverLetters","images"})
 @PrimaryKeyJoinColumn(name = "user_id", referencedColumnName = "id")
 public class Candidate extends User {
 

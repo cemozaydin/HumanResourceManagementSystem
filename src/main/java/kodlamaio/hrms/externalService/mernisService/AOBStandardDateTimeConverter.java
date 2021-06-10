@@ -1,4 +1,4 @@
-package kodlamaio.hrms.mernisService;
+package kodlamaio.hrms.externalService.mernisService;
 
 //----------------------------------------------------
 //
