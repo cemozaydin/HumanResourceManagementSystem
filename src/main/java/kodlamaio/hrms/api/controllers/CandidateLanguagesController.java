@@ -26,6 +26,12 @@ public class CandidateLanguagesController {
         return this.candidateLanguageService.getAllCandidateLanguageDetails();
     }
 
+    @GetMapping("/getCandidateLanguageDetailsByCandidateId")
+    public Result getCandidateLanguageDetailsByCandidateId(int id){
+        return this.candidateLanguageService.getCandidateLanguageDetailsByCandidateId(id);
+    }
+
+
     @PostMapping("/add")
     public Result add(@RequestBody CandidateLanguage candidateLanguage){
         return this.candidateLanguageService.add(candidateLanguage);

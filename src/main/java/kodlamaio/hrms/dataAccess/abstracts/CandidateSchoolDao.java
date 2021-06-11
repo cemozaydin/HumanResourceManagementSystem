@@ -1,7 +1,7 @@
 package kodlamaio.hrms.dataAccess.abstracts;
 
 import kodlamaio.hrms.entities.concretes.CandidateSchool;
-import kodlamaio.hrms.entities.dtos.CandidateSchoolDetailDto;
+import kodlamaio.hrms.entities.dtos.CandidateSchoolDetailsDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -14,7 +14,7 @@ public interface CandidateSchoolDao extends JpaRepository<CandidateSchool, Integ
     @Query(value = "FROM CandidateSchool cs Where cs.candidate.id=:candidateId ORDER BY cs.graduatedDate DESC")
     List<CandidateSchool> findAllByCandidate_idOrderByDesc(int candidateId);
 
-    @Query(value = "SELECT new kodlamaio.hrms.entities.dtos.CandidateSchoolDetailDto" +
+    @Query(value = "SELECT new kodlamaio.hrms.entities.dtos.CandidateSchoolDetailsDto" +
             "(cs.id, ca.id, ca.firstName, ca.lastName, " +
             "u.universityName, f.facultyName, d.departmentName, cs.startingDate, cs.graduatedDate) " +
             "FROM Candidate ca " +
@@ -23,7 +23,19 @@ public interface CandidateSchoolDao extends JpaRepository<CandidateSchool, Integ
             "INNER JOIN Faculty f ON cs.facultyId = f.id " +
             "INNER JOIN Department d ON cs.departmentId = d.id " +
             "ORDER BY cs.graduatedDate DESC")
-    List<CandidateSchoolDetailDto> getAllCandidateSchoolDetails();
+    List<CandidateSchoolDetailsDto> getAllCandidateSchoolDetails();
+
+    @Query(value = "SELECT new kodlamaio.hrms.entities.dtos.CandidateSchoolDetailsDto" +
+            "(cs.id, ca.id, ca.firstName, ca.lastName, " +
+            "u.universityName, f.facultyName, d.departmentName, cs.startingDate, cs.graduatedDate) " +
+            "FROM Candidate ca " +
+            "INNER JOIN ca.candidateSchools cs " +
+            "INNER JOIN University u ON cs.universityId = u.id " +
+            "INNER JOIN Faculty f ON cs.facultyId = f.id " +
+            "INNER JOIN Department d ON cs.departmentId = d.id " +
+            "WHERE ca.id=:id " +
+            "ORDER BY cs.graduatedDate DESC")
+    List<CandidateSchoolDetailsDto> getCandidateSchoolDetailsByCandidateId(int id);
 
 
 

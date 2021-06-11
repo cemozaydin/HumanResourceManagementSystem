@@ -41,6 +41,14 @@ public class CandidateSchoolsController {
         return this.candidateSchoolService.getAllCandidateSchoolDetails();
     }
 
+    @GetMapping("/getCandidateSchoolDetailsByCandidateId")
+    public Result getCandidateSchoolDetailsByCandidateId(@RequestParam int id){
+        return this.candidateSchoolService.getCandidateSchoolDetailsByCandidateId(id);
+    }
+
+
+
+
     @GetMapping("/getAllByCandidate_idOrderByDesc")
     public Result getAllByCandidate_idOrderByDesc(int candidateId){
         return this.candidateSchoolService.getAllByCandidate_idOrderByDesc(candidateId);

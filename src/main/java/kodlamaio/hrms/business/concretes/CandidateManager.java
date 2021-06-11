@@ -9,6 +9,7 @@ import kodlamaio.hrms.core.utilities.generator.Genarator;
 import kodlamaio.hrms.core.utilities.results.*;
 import kodlamaio.hrms.dataAccess.abstracts.CandidateDao;
 import kodlamaio.hrms.entities.concretes.Candidate;
+import kodlamaio.hrms.entities.dtos.CandidateCVDetailsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,16 @@ public class CandidateManager implements CandidateService {
     @Override
     public DataResult<List<Candidate>> getAll() {
         return new SuccessDataResult<List<Candidate>>(this.candidateDao.findAll());
+    }
+
+    @Override
+    public DataResult<Candidate> getById(int id) {
+        return new SuccessDataResult<Candidate>(this.candidateDao.findById(id));
+    }
+
+    @Override
+    public DataResult<CandidateCVDetailsDto> getCandidateCVDetailsByCandidateId(int id) {
+        return new SuccessDataResult<CandidateCVDetailsDto>(this.candidateDao.findCandidateCVDetailsByCandidateId(id));
     }
 
     @Override

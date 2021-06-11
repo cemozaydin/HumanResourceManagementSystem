@@ -4,7 +4,7 @@ import kodlamaio.hrms.business.abstracts.CandidateLanguageService;
 import kodlamaio.hrms.core.utilities.results.*;
 import kodlamaio.hrms.dataAccess.abstracts.CandidateLanguageDao;
 import kodlamaio.hrms.entities.concretes.CandidateLanguage;
-import kodlamaio.hrms.entities.dtos.CandidateLanguageDetailDto;
+import kodlamaio.hrms.entities.dtos.CandidateLanguageDetailsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,7 +51,14 @@ public class CandidateLanguageManager implements CandidateLanguageService {
     }
 
     @Override
-    public DataResult<List<CandidateLanguageDetailDto>> getAllCandidateLanguageDetails() {
-        return new SuccessDataResult<List<CandidateLanguageDetailDto>>(this.candidateLanguageDao.getAllCandidateLanguageDetails());
+    public DataResult<List<CandidateLanguageDetailsDto>> getAllCandidateLanguageDetails() {
+        return new SuccessDataResult<List<CandidateLanguageDetailsDto>>(
+                this.candidateLanguageDao.getAllCandidateLanguageDetails());
+    }
+
+    @Override
+    public DataResult<List<CandidateLanguageDetailsDto>> getCandidateLanguageDetailsByCandidateId(int id) {
+        return new SuccessDataResult<List<CandidateLanguageDetailsDto>>(
+                this.candidateLanguageDao.getCandidateLanguageDetailsByCandidateId(id));
     }
 }

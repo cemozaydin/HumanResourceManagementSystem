@@ -35,6 +35,16 @@ public class CandidatesController {
         return this.candidateService.getAll();
     }
 
+    @GetMapping("/getById")
+    public Result getById(@RequestParam int id){
+        return this.candidateService.getById(id);
+    }
+
+    @GetMapping("/getCandidateCVDetailsByCandidateId")
+    public Result getCandidateCVDetailsByCandidateId(@RequestParam int id){
+        return this.candidateService.getCandidateCVDetailsByCandidateId(id);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class) // AOP
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorDataResult<Object> handleValidationException(MethodArgumentNotValidException exceptions){

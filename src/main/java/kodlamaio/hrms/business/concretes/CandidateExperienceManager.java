@@ -7,7 +7,7 @@ import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.CandidateExperienceDao;
 import kodlamaio.hrms.entities.concretes.CandidateExperience;
-import kodlamaio.hrms.entities.dtos.CandidateExperienceDetailDto;
+import kodlamaio.hrms.entities.dtos.CandidateExperienceDetailsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,11 +40,19 @@ public class CandidateExperienceManager implements CandidateExperienceService {
 
     @Override
     public DataResult<List<CandidateExperience>> getAll() {
-        return new SuccessDataResult<List<CandidateExperience>>(this.candidateExperienceDao.findAll());
+        return new SuccessDataResult<List<CandidateExperience>>(
+                this.candidateExperienceDao.findAll());
     }
 
     @Override
-    public DataResult<List<CandidateExperienceDetailDto>> getAllCandidateExperienceDetails() {
-        return new SuccessDataResult<List<CandidateExperienceDetailDto>>(this.candidateExperienceDao.getAllCandidateExperienceDetails());
+    public DataResult<List<CandidateExperienceDetailsDto>> getAllCandidateExperienceDetails() {
+        return new SuccessDataResult<List<CandidateExperienceDetailsDto>>(
+                this.candidateExperienceDao.getAllCandidateExperienceDetails());
+    }
+
+    @Override
+    public DataResult<List<CandidateExperienceDetailsDto>> getCandidateExperienceDetailsByCandidateId(int id) {
+        return new SuccessDataResult<List<CandidateExperienceDetailsDto>>(
+                this.candidateExperienceDao.getCandidateExperienceDetailsByCandidateId(id));
     }
 }

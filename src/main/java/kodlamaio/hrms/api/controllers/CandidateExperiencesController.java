@@ -3,11 +3,8 @@ package kodlamaio.hrms.api.controllers;
 import kodlamaio.hrms.business.abstracts.CandidateExperienceService;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.CandidateExperience;
-import kodlamaio.hrms.entities.dtos.CandidateExperienceDetailDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/candidateexperiences")
@@ -28,6 +25,12 @@ public class CandidateExperiencesController {
     public Result getAllCandidateExperienceDetails(){
         return this.candidateExperienceService.getAllCandidateExperienceDetails();
     }
+
+    @GetMapping("/getCandidateExperienceDetailsByCandidateId")
+    public Result getCandidateExperienceDetailsByCandidateId(@RequestParam int id){
+        return this.candidateExperienceService.getCandidateExperienceDetailsByCandidateId(id);
+    }
+
 
     @PostMapping("/add")
     public Result add(@RequestBody CandidateExperience candidateExperience){

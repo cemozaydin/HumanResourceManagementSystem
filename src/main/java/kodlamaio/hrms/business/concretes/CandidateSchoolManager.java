@@ -7,7 +7,7 @@ import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.CandidateSchoolDao;
 import kodlamaio.hrms.entities.concretes.CandidateSchool;
-import kodlamaio.hrms.entities.dtos.CandidateSchoolDetailDto;
+import kodlamaio.hrms.entities.dtos.CandidateSchoolDetailsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,7 +56,12 @@ public class CandidateSchoolManager implements CandidateSchoolService {
     }
 
     @Override
-    public DataResult<List<CandidateSchoolDetailDto>> getAllCandidateSchoolDetails() {
-        return new SuccessDataResult<List<CandidateSchoolDetailDto>>(this.candidateSchoolDao.getAllCandidateSchoolDetails());
+    public DataResult<List<CandidateSchoolDetailsDto>> getAllCandidateSchoolDetails() {
+        return new SuccessDataResult<List<CandidateSchoolDetailsDto>>(this.candidateSchoolDao.getAllCandidateSchoolDetails());
+    }
+
+    @Override
+    public DataResult<List<CandidateSchoolDetailsDto>> getCandidateSchoolDetailsByCandidateId(int id) {
+        return new SuccessDataResult<List<CandidateSchoolDetailsDto>>(this.candidateSchoolDao.getCandidateSchoolDetailsByCandidateId(id));
     }
 }

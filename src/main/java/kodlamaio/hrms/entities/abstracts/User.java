@@ -1,5 +1,6 @@
 package kodlamaio.hrms.entities.abstracts;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import kodlamaio.hrms.entities.concretes.Image;
 import lombok.AllArgsConstructor;
@@ -26,6 +27,7 @@ public class User {
     private String email;
 
     @Column(name = "password")
+    @JsonIgnore
     private String password;
 
     @Column(name = "is_active")
