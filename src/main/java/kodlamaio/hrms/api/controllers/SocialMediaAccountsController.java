@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/candidatesocialmediaaccounts")
+@CrossOrigin
 public class SocialMediaAccountsController {
     private SocialMediaAccountService socialMediaAccountService;
 

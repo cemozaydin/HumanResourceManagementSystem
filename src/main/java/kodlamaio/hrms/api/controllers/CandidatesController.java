@@ -17,6 +17,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/candidates")
+@CrossOrigin
 public class CandidatesController {
     private CandidateService candidateService;
 

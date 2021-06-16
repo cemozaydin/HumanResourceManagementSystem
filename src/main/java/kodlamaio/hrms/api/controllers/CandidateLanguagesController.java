@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/candidatelanguages")
+@CrossOrigin
 public class CandidateLanguagesController {
     private CandidateLanguageService candidateLanguageService;
 

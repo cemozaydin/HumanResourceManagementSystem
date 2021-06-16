@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController  // Sen bir controllersın demek
 @RequestMapping("/api/jobtitles")
+@CrossOrigin
 public class JobTitlesController {
 
     private JobTitleService jobTitleService;
