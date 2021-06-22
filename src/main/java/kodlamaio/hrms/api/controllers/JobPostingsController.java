@@ -4,7 +4,6 @@ import kodlamaio.hrms.business.abstracts.JobPostingService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.JobPosting;
-import kodlamaio.hrms.entities.dtos.JobPostingWithEmployerAndJobTitleDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,24 +25,55 @@ public class JobPostingsController {
         return this.jobPostingService.add(jobPosting);
     }
 
-    @PostMapping("/changeJobPostingStatus")
-    public Result changeJobPostingStatus(@RequestBody int jobPostingId, boolean status){
-        return this.jobPostingService.changeJobPostingStatus(jobPostingId, status);
+    @PostMapping("/updateJobPostingIsActiveStatus")
+    public Result updateJobPostingIsActiveStatus(@RequestParam int jobPostingId, boolean status){
+        return this.jobPostingService.updateJobPostingIsActiveStatus(jobPostingId, status);
     }
 
-    @GetMapping("/getJobPostingDetails")
-    public DataResult<List<JobPostingWithEmployerAndJobTitleDto>> getJobPostingDetails(){
-        return this.jobPostingService.getJobPostingDetails();
+    @PostMapping("/updateJobPostingAdminConfirmStatus")
+    public Result updateJobPostingAdminConfirmStatus(@RequestParam int jobPostingId, boolean status){
+        return this.jobPostingService.updateJobPostingAdminConfirmStatus(jobPostingId,status);
     }
 
-    @GetMapping("/getJobPostingDetailsOrderByPostingReleaseDate")
-    public DataResult<List<JobPostingWithEmployerAndJobTitleDto>> getJobPostingDetailsOrderByPostingReleaseDate(){
-        return this.jobPostingService.getJobPostingDetailsOrderByPostingReleaseDate();
+    @GetMapping("/getAll")
+    public DataResult<List<JobPosting>> getAll(){
+        return this.jobPostingService.getAll();
     }
 
-    @GetMapping("/getJobPostingDetailsByEmployerId")
-    public DataResult<List<JobPostingWithEmployerAndJobTitleDto>> getJobPostingDetailsByEmployerId(int employerId){
-        return this.jobPostingService.getJobPostingDetailsByEmployerId(employerId);
+    @GetMapping("/getAllByIsActiveAndPendingApproval")
+    public DataResult<List<JobPosting>> getAllByIsActiveAndPendingApproval(){
+        return this.jobPostingService.getAllByIsActiveAndPendingApproval();
     }
+
+    @GetMapping("/getAllByIsActiveAndAdminApproved")
+    public DataResult<List<JobPosting>> getAllByIsActiveAndAdminApproved(){
+        return this.jobPostingService.getAllByIsActiveAndAdminApproved();
+    }
+
+    @GetMapping("/getAllByIsActiveFalse")
+    public DataResult<List<JobPosting>> getAllByIsActiveFalse(){
+        return this.jobPostingService.getAllByIsActiveFalse();
+    }
+
+    @GetMapping("/getAllByIsActiveAndPendingApprovalOrderByDeadlineDesc")
+    public DataResult<List<JobPosting>> getAllByIsActiveAndPendingApprovalOrderByDeadlineDesc(){
+        return this.jobPostingService.getAllByIsActiveAndPendingApprovalOrderByDeadlineDesc();
+    }
+
+    @GetMapping("/getAllByIsActiveAndAdminConfirmAndEmployerId")
+    public DataResult<List<JobPosting>> getAllByIsActiveAndAdminConfirmAndEmployerId(@RequestParam int employerId){
+        return this.jobPostingService.getAllByIsActiveAndAdminConfirmAndEmployerId(employerId);
+    }
+
+    @GetMapping("/getAllByIsActiveAndPendingApprovalAndEmployerId")
+    public DataResult<List<JobPosting>> getAllByIsActiveAndPendingApprovalAndEmployerId(@RequestParam int employerId){
+        return this.jobPostingService.getAllByIsActiveAndPendingApprovalAndEmployerId(employerId);
+    }
+
+    @GetMapping("/getJobPostingById")
+    public DataResult<JobPosting> getJobPostingById(@RequestParam int id){
+        return this.jobPostingService.getJobPostingById(id);
+    }
+
 
 }

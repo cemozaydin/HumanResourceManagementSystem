@@ -5,6 +5,7 @@ import kodlamaio.hrms.entities.abstracts.User;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -40,6 +41,7 @@ public class Candidate extends User {
     private String identityNumber;
 
     @Column(name = "birth_date")
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
     private LocalDate birthDate;
 
     @OneToMany(mappedBy = "candidate")

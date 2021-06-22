@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class JobPostingWithEmployerAndJobTitleDto {
+public class JobPostingDetailsDto {
     private int id;
     private String companyName;
     private String jobTitle;
@@ -19,5 +19,9 @@ public class JobPostingWithEmployerAndJobTitleDto {
     private int numberOfOpenPositions;
     private LocalDate postingReleaseDate;
     private LocalDate postingDeadline;
+    private String jobTypeDescription;
+    private String workplaceTypeDescription;
+    private boolean isConfirmByAdmin;
     private boolean isActive;
+
 }
