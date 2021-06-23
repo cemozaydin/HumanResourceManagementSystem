@@ -5,6 +5,7 @@ import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.dataAccess.abstracts.WorkplaceTypeDao;
 import kodlamaio.hrms.entities.concretes.WorkplaceType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 public class WorkplaceTypeManager implements WorkplaceTypeService {
     private WorkplaceTypeDao workplaceTypeDao;
 
+    @Autowired
     public WorkplaceTypeManager(WorkplaceTypeDao workplaceTypeDao) {
         this.workplaceTypeDao = workplaceTypeDao;
     }
