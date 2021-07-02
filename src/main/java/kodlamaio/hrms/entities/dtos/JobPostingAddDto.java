@@ -22,7 +22,7 @@ public class JobPostingAddDto {
     private BigDecimal min_salary;
     private BigDecimal max_salary;
     private int currencyId;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     private LocalDate postingDeadline;
     private int jobTypeId;
     private int workplaceTypeId;
