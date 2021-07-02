@@ -1,6 +1,7 @@
 package kodlamaio.hrms.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "job_postings")
-//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","jobType", "workplaceType"})
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","jobType", "workplaceType","employer"})
 public class JobPosting {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +38,7 @@ public class JobPosting {
     private LocalDate postingReleaseDate= LocalDate.now();
 
     @Column(name = "posting_deadline")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
     private LocalDate postingDeadline;
 
     @Column(name = "number_of_open_positions")

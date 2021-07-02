@@ -29,7 +29,7 @@ public class CandidateManager implements CandidateService {
             CandidateDao candidateDao,
             @Qualifier("checkFakeMernisAdapter") CheckMernisService checkMernisService,
             EmailCheckService emailCheckService,
-            @Qualifier("sendEmailManager") SendEmailService sendEmailService
+            @Qualifier("fakeSendEmailManager") SendEmailService sendEmailService
     ) {
         super();
         this.candidateDao = candidateDao;

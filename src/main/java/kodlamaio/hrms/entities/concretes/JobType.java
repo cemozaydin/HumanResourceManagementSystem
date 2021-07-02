@@ -20,8 +20,8 @@ public class JobType {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "jobtype_desc")
+    private String jobTypeDesc;
 
     @OneToMany(mappedBy = "jobType")
     private List<JobPosting> jobPostings;

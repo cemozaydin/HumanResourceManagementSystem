@@ -20,8 +20,8 @@ public class WorkplaceType {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "workplace_desc")
+    private String workplaceDesc;
 
     @OneToMany(mappedBy = "workplaceType")
     private List<JobPosting> jobPostings;
